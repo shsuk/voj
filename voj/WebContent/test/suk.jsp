@@ -20,7 +20,7 @@
 </head>
 <body >
 
-<db:db queryPath="test/image" >
+<db:db queryPath="test/image" actionFild="act">
 	{
 		a:"123",
 		b:"qqq"
