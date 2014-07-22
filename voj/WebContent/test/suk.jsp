@@ -16,7 +16,7 @@
 			document.location.href = $(e.currentTarget).attr('link_url');
 		});
 	});
-</script>
+</script> 
 </head>
 <body >
 
@@ -25,7 +25,7 @@
 		a:"123",
 		b:"qqq"
 	}
-</db:db>
+</db:db> 
 ${rows }
 <table style="" border="1">
 <t:list src="${rows }">
