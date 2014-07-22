@@ -32,7 +32,7 @@ ${rows }
 	<tr>
 		<td><a href="@{link_url}">@{img_id}</a></td>
 		<td>[@{link_url}]</td>
-		<td>@{title}</td>
+		<td>@{title}</td>ddd
 	</tr>
 </t:list>
 </table>
