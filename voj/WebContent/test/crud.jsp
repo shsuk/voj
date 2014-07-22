@@ -1,0 +1,42 @@
+<%@ page contentType="text/html; charset=utf-8"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
+<%@ taglib prefix="db" uri="/WEB-INF/tlds/db.tld"%>
+<%@ taglib prefix="t"  tagdir="/WEB-INF/tags/test" %> 
+
+<htm>
+<head>
+<script src="../jquery/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+	
+	$(function() {
+		$('tr[img_id]').click(function(e){
+			document.location.href = $(e.currentTarget).attr('link_url');
+		});
+	});
+</script> 
+</head>
+<body >
+
+<db:db queryPath="test/crud" actionFild="act">
+	{
+		a:"123",
+		b:"qqq"
+	}
+</db:db> 
+
+${row }
+<table style="" border="1">
+<t:view src="${empty(row1) ? row2 : row1 }">
+	<tr>
+		<th>@{key}</th>
+		<td>@{value}</td>
+	</tr>
+</t:view>
+</table>
+<br>
+
+</body>
+</htm>
