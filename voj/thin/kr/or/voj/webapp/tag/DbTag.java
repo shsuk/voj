@@ -25,17 +25,17 @@ public class DbTag extends BodyTagSupport {
 	 */
 	private static final long serialVersionUID = -8153914754350715168L;
 	String queryPath = null;
-	String scope = null;
+	String actionFild = null;
 	
-	public void setScope(String scope) {
-		this.scope = scope;
+	public void setActionFild(String actionFild) {
+		this.actionFild = actionFild;
 	}
 	public void setQueryPath(String queryPath) {
 		this.queryPath = queryPath;
 	}
 	public int doEndTag() throws JspException {
 		try {
-			DBProcessor db = ProcessorServiceFactory.getProcessorService("db");
+			
 			ServletRequest request = pageContext.getRequest();
 			JSONObject result = new JSONObject();
 			CaseInsensitiveMap params = new CaseInsensitiveMap();
@@ -63,8 +63,10 @@ public class DbTag extends BodyTagSupport {
 				}
 			}
 			
-			params.put("_QUERY_PATH_", queryPath);
-			Map<String, Object> resultSet = db.execute(params);
+			String action = (String)req.get(actionFild);
+			action = StringUtils.isEmpty(action) ? "" : action;
+			
+			Map<String, Object> resultSet = ProcessorServiceFactory.executeDataBase(queryPath, params, action);
 			
 			for(String key : resultSet.keySet()){
 				result.put(key, resultSet.get(key));
