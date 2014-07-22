@@ -1,0 +1,21 @@
+INSERT INTO schedule_tbl(
+	scd_id,
+	scd_name,
+	scd_path,
+	scd_period,
+	scd_run_ip,
+	log_write,
+	dsc,
+	use_yn,
+	mod_user
+)VALUES(
+	@{scd_id},
+	@{scd_name},
+	@{scd_path},
+	@{scd_period},
+	@{scd_run_ip},
+	@{log_write},
+	@{dsc},
+	@{use_yn},
+	@{session.user_id}
+);

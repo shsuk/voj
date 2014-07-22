@@ -1,0 +1,19 @@
+INSERT INTO workflow_tbl(
+	wf_id,
+	wf_name,
+	job_trigger_yn,
+	job_trigger_chk_val,
+	job_trigger_path,
+	job_type,
+	job_desc,
+	mod_user
+)VALUES(
+	sid.nextval,
+	@{wf_name},
+	@{job_trigger_yn},
+	@{job_trigger_chk_val},
+	@{job_trigger_path},
+	@{job_type},
+	@{job_desc},
+	@{session.user_id}
+)

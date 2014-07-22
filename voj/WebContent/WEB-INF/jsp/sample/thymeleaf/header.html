@@ -1,0 +1,31 @@
+<script type="text/javascript">
+<!--
+$(function() {
+
+	$('td[title]').click(function(e){
+		var rid =  $(e.currentTarget).attr('title');
+		$('#detail').load('at.sh?_ps=sample/thymeleaf/body',{rid: rid});
+	})
+
+});
+
+function view(rid){
+	$('#detail').load('at.sh?_ps=sample/thymeleaf/body');
+}
+//-->
+</script>
+
+<div class="contents-list" desc="dep4 singleRow" style="overflow: auto;border1: 1px solid #d4d4d4; padding1: 2px;margin1: 2px;">
+	<table class="ui-widget ui-widget-content contents-contain" >
+		<tr class="ui-state-default" >
+			<th>NAME</th>
+			<th>PRICE</th>
+			<th>IN STOCK</th>
+		</tr>
+		<tr  class="ui-widget-content over" th:each="prod : ${rows}">
+			<td th:text="${prod['group_id']}">Onions</td>
+			<td th:text="${prod['code_value']}">2.41</td>
+			<td th:title="${prod['rid']}" ><a href="#" th:text="${prod['code_name']}">dfd</a></td>
+		</tr>
+	</table>
+</div>

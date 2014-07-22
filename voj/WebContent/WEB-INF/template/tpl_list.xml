@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<controls>
+	<control type="root"><![CDATA[
+<%@ page contentType="text/html; charset=utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
+<%@ taglib prefix="uf" uri="/WEB-INF/tlds/fnc.tld"%>
+<%@ taglib prefix="code" uri="/WEB-INF/tlds/Code.tld"%>
+
+<uf:organism desc="사용방법은 다음 URL 참조 at.sh?_ps=admin/test_menu">[
+	<uf:job id="rows" jobId="db" query="#qyery_id#" singleRow="false">
+			defaultValues:{
+			listCount:15,
+			pageNo:1,
+			_sort_val: "${req._sort_key!=null && req._sort_key!='' ? ' ORDER BY ' : ''}${req._sort_key!=null && req._sort_key!='' ? req._sort_key : ''}${req._sort_key!=null && req._sort_key!='' ? (req._sort_opt=='d' ? ' desc ' : ' asc ') : '' }"
+		}
+	</uf:job>
+]</uf:organism>
+
+
+<jsp:include page="../seller_layout.jsp" >
+	<jsp:param name="gnb" value="stat"/>
+	<jsp:param name="lnb_idx" value="09"/>
+	<jsp:param name="lnb_dc" value="stat_sel"/>
+	<jsp:param name="lnb_c" value=""/>
+</jsp:include>
+
+<script type="text/javascript">
+	$(function() {
+		$('#search_btn').button({icons: {primary: "ui-icon-search"}}).click(function(){
+			search();
+		});
+	});
+		
+	function search(){
+		//폼 정합성 체크
+		
+		goPage(0);
+		
+		return false;
+	}
+	
+	function goPage(pageNo){
+		var form = $('form[name=main_form]');
+		var target_layer = $('#body_main').parent();
+		
+		var data = {_layout:'n', _ps: '${req._ps}'};
+		
+		var fields = form.serializeArray();
+		$.each(fields, function(i, field){
+			data[field.name] =field.value;
+		});
+	
+		if(pageNo!=0){
+			data['pageNo'] = pageNo;
+		}
+
+		_history.data('list',url,data);
+
+		target_layer.hide("fade");
+		target_layer.show( "fade");
+		target_layer.load('at.sh', data);
+	}
+	
+	function load_view(div){
+		var target_layer = $('#body_main').parent();
+		
+		var url = $(div).attr('url') + '&_layout=n';
+
+		_history.data('view',url,{});
+
+		target_layer.hide("fade");
+		target_layer.show( "fade");
+		target_layer.load(url);
+	}
+</script>
+
+<div  id="body_main">
+	<div>title</div>
+	<form id="main_form" name="main_form" action="" onsubmit="return search()">
+		<div class="${tpl_class_search}">
+			#{search}#
+			<div id="search_btn" class="btn-r">조회</div>
+		</div>
+	</form>
+	
+	<table class="${tpl_class_table}" >
+		<tr class="${tpl_class_table_header}">
+			#{loop_title}#
+		</tr>
+		<c:forEach var="row" items="${rows }">
+		<tr>
+			#{loop}#
+		</tr>
+		</c:forEach>
+	</table>
+	<c:set scope="request" var="rows" value="${rows }"></c:set>
+	<jsp:include page="../simple_paging.jsp"/>
+</div>
+	]]></control>
+	<control type="loop_title"><![CDATA[
+			<th>#label#</th>]]></control>
+	<control type="loop"><![CDATA[
+			<td>
+#value#
+			</td>]]></control>
+	<control type="radio"><![CDATA[
+				<c:set scope="request" var="group_id" value="#name#"/>
+				<c:set scope="request" var="name" value="#name#"></c:set>
+				<c:set scope="request" var="selected" value="${row['#name#']}"/>
+				<c:set scope="request" var="att" value=" valid=\"[#valid#]\" "/>
+				<jsp:include page="../../system/tpl/radio_button.jsp"/>
+	]]></control>
+	<control type="check"><![CDATA[
+				<c:set scope="request" var="group_id" value="#name#"/>
+				<c:set scope="request" var="name" value="#name#"></c:set>
+				<c:set scope="request" var="selected" value="${row['#name#']}"/>
+				<c:set scope="request" var="att" value=" valid=\"[#valid#]\" "/>
+				<jsp:include page="../../system/tpl/check_box.jsp"/>
+	]]></control>
+	<control type="select"><![CDATA[
+				<c:set scope="request" var="group_id" value="#name#"/>
+				<c:set scope="request" var="name" value="#name#"></c:set>
+				<c:set scope="request" var="selected" value="${row['#name#']}"/>
+				<c:set scope="request" var="att" value=" valid=\"[#valid#]\" "/>
+				<c:set scope="request" var="emptyText" value="#label#을(를) 선택하세요."/>
+				<jsp:include page="../../system/tpl/select_box.jsp"/>
+	]]></control>
+	<control type="number"><![CDATA[
+				<input type="number" id="#name#" name="#name#" value="${row['#name#']}"  class="spinner" valid="[#valid#]" >	
+	]]></control>
+	<control type="date"><![CDATA[
+				<input type="text" id="#name#" name="#name#" value="${row['#name#']}" class="datepicker"  valid="[#valid#]" >	
+	]]></control>
+	<control type="default"><![CDATA[
+				<input type="text" id="#name#" name="#name#" value="${fn:escapeXml(row['#name#'])}"  valid="[#valid#]">	
+	]]></control>
+	
+	<control type="r_number"><![CDATA[
+				<fmt:formatNumber value="${row['#name#']}" type="number" />
+	]]></control>
+	<control type="r_date"><![CDATA[
+				<fmt:formatDate value="${row['#name#']}" pattern="yyyy-MM-dd HH:mm:ss" />
+	]]></control>
+	<control type="r_codee"><![CDATA[
+				${code:name('#name#', row['#name#'], lang)}
+	]]></control>
+	<control type="r_default"><![CDATA[
+				${uf:escapeXml(row['#name#']) }
+	]]></control>
+
+	<control type="hidden"><![CDATA[
+				<input type="hidden" id="#name#" name="#name#" value="${fn:escapeXml(row['#name#'])}"  valid="[#valid#]" >	
+	]]></control>
+	
+	<control type="search_radio"><![CDATA[
+			<div class="btn-l">#label#</div>
+			<c:set scope="request" var="group_id" value="#name#"/>
+			<c:set scope="request" var="name" value="#name#"></c:set>
+			<c:set scope="request" var="selected" value="${req.#name#}"/>
+			<c:set scope="request" var="att" value=" class=\"btn-l\" "/>
+			<jsp:include page="../../system/tpl/radio_button.jsp"/>
+	]]></control>
+	<control type="search_check"><![CDATA[
+			<div class="btn-l">#label#</div>
+			<c:set scope="request" var="group_id" value="#name#"/>
+			<c:set scope="request" var="name" value="#name#"></c:set>
+			<c:set scope="request" var="selected" value="${req.#name#}"/>
+			<c:set scope="request" var="att" value=" class=\"btn-l\" "/>
+			<jsp:include page="../../system/tpl/check_box.jsp"/>
+	]]></control>
+	<control type="search_select"><![CDATA[
+			<div class="btn-l">#label#</div>
+			<c:set scope="request" var="group_id" value="#name#"/>
+			<c:set scope="request" var="name" value="#name#"></c:set>
+			<c:set scope="request" var="selected" value="${req.#name#}"/>
+			<c:set scope="request" var="emptyText" value="#label#을(를) 선택하세요."/>
+			<c:set scope="request" var="att" value=" class=\"btn-l\" "/>
+			<jsp:include page="../../system/tpl/select_box.jsp"/>
+	]]></control>
+	<control type="search_NUMBER"><![CDATA[
+			<div class="btn-l">#label#</div>
+			<input type="number" class="btn-l" id="#name#" name="#name#" value="${req.#name#}"  class="spinner" >	
+	]]></control>
+	<control type="search_DATE"><![CDATA[
+			<div class="btn-l">#label#</div>
+			<input type="text" class="btn-l" id="#name#" name="#name#" class=\"btn-l\" value="${req.#name#}" class="datepicker">	
+	]]></control>
+	<control type="search_default"><![CDATA[
+			<div class="btn-l">#label#</div>
+			<input type="text" class="btn-l" id="#name#" name="#name#" value="${fn:escapeXml(req.#name#)}" >	
+	]]></control>
+</controls>

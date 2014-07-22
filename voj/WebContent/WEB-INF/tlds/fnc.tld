@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.0" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd">
+	<description>JSTL 1.1 Math library</description>
+	<display-name>JSTL math</display-name>
+	<tlib-version>1.1</tlib-version>
+	<short-name>f</short-name>
+	<uri>http://voj.or.kr/jsp/jstl/math</uri>
+
+	<tag>
+		<name>tpl</name>
+		<tag-class>net.ion.webapp.controller.tag.TemplateTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>src</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>data</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>job</name>
+		<description>프로세서에서 실행될 Job을 설정한다. 
+			프로세서에 설정한 속성중 이곳에 정의 되지 않은 속성은 body영역에 JSON문법을 사용하여 설정할 있고 
+			정의된 속성도 body영영에 정의 하여 사용할 수 있다.
+		</description>
+		<display-name>Job 설정</display-name>
+		<tag-class>net.ion.webapp.controller.tag.JobTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<description>복수개의 레코드셋을 반환하는 경우 id="['rows1', 'rows2']" 와 같이 명시적으로 선언 할 수 있다.\n
+			 	이 경우 반환되는 레코드셋이 선언된 갯수와 일치해야 한다.
+				id="rows" 와 같이 선언할 수도 있다. 이 경우 rows에 각 셋이  리스트로 반환된다. (rows[0][0].fld1)
+			</description>
+			<name>id</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>jobId</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>test 식의 값이 true일 경우 실행하고 false인 경우는 실행하지 않는다.</description>
+			<name>test</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description>Data Source ID</description>
+			<name>ds</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>src</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>desc</name>
+			<description>주석</description>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>쿼리패스</description>
+			<name>query</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>true인 경우 쿼리결과를 하나의 레코드만 오브렉트 형식으로 반환한다.</description>
+			<name>singleRow</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description>Job을 실행하기 위한 기본 파라메터를 설정해 준다. 
+				body영역에 설정할 수도 있다.
+				defaultValues:{
+					listCount:15,
+					pageNo:1,
+					_sort_val: "${empty(req._sort_key) ? '' : fn:replace(fn:replace(' ORDER BY @key @opt ','@key', req._sort_key), '@opt',  (req._sort_opt=='d' ? ' desc ' : ' asc '))}"
+				}</description>
+			<name>defaultValues</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>프로세서를 레코드 개수 만큼 반복 처리한다. 예)forEach:'param.email', var:'row', emptySkip=true</description>
+			<name>forEach</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>forEach에서 사용시 반환되는 값의 변수. 예)forEach:'param.email', var:'row', emptySkip=true</description>
+			<name>var</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>forEach에서 사용시 true인 경우 스킵한다. 예)forEach:'param.email', var:'row', emptySkip=true</description>
+			<name>emptySkip</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description>식의 값이 true이면 잡을 실행하지 않는다.</description>
+			<name>skip</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description>key</description>
+			<name>key</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>true인 경우 쿼리에 설정된 컬럼 정보를 반환한다.</description>
+			<name>isReturnColumInfo</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description>true인 경우 처리결과의 값을 반환하지 않는다.</description>
+			<name>isReturn</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description>true인 경우 db프로세서의 결과를 캐쉬한다.</description>
+			<name>isCache</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description>db프로세서의 결과를 캐쉬하는 시간을 설정한다.(단위 : 초)</description>
+			<name>refreshTime</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>long</type>
+		</attribute>
+	</tag>
+
+	<tag>
+		<description>처리할 프로세스를 설정한다.</description>
+		<display-name>프로세스 설정</display-name>
+		<name>organism</name>
+		<tag-class>net.ion.webapp.controller.tag.OrganismTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>processInfo</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>test 식의 값이 true일 경우 실행하고 false인 경우는 실행하지 않는다.</description>
+			<name>test</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description>Token이 발행된폼만 처리한다.</description>
+			<name>token</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<name>tokenName</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>워크플로우의 트리거 대상으로 사용</description>
+			<name>useTrigger</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<name>noException</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<name>params</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>추가 데이타로 사용할 pageContext의 Data 아이디.</description>
+			<name>pageContextDataId</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>src</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>desc</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>split2map</name>
+		<tag-class>net.ion.webapp.controller.tag.Split2MapTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<name>separator</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>split2list</name>
+		<tag-class>net.ion.webapp.controller.tag.Split2ListTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<name>separator</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>token</name>
+		<tag-class>net.ion.webapp.controller.tag.TokenTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>name</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>hiddens</name>
+		<tag-class>net.ion.webapp.controller.tag.PageHiddenTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>args</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+		
+	<function>
+		<description>버림</description>
+		<name>floor</name>
+		<function-class>java.lang.Math</function-class>
+		<function-signature>double floor(double)</function-signature>
+	</function>
+	<function>
+		<description>랜덤함수</description>
+		<name>random</name>
+		<function-class>java.lang.Math</function-class>
+		<function-signature>double random()</function-signature>
+	</function>
+	<function>
+		<description>올림</description>
+		<name>ceil</name>
+		<function-class>java.lang.Math</function-class>
+		<function-signature>double ceil(double)</function-signature>
+	</function>
+	<function>
+		<description>반올림</description>
+		<name>round</name>
+		<function-class>java.lang.Math</function-class>
+		<function-signature>long round(double)</function-signature>
+	</function>
+	<function>
+		<description>double to long</description>
+		<name>double2long</name>
+		<function-class>net.ion.webapp.utils.Function</function-class>
+		<function-signature>long double2long(double)</function-signature>
+	</function>
+	<function>
+		<description>parseLong</description>
+		<name>parseLong</name>
+		<function-class>java.lang.Long</function-class>
+		<function-signature>long parseLong(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>parseInt</description>
+		<name>parseInt</name>
+		<function-class>java.lang.Integer</function-class>
+		<function-signature>int parseInt(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>UUID</description>
+		<name>uuid</name>
+		<function-class>java.util.UUID</function-class>
+		<function-signature>java.util.UUID randomUUID()</function-signature>
+	</function>
+	<function>
+		<description>formatDate</description>
+		<name>formatDate</name>
+		<function-class>net.ion.webapp.utils.Function</function-class>
+		<function-signature>java.lang.String formatDate(java.util.Date,
+			java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>getDate</description>
+		<name>getDate</name>
+		<function-class>net.ion.webapp.utils.Function</function-class>
+		<function-signature>java.lang.String formatDate(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>now</description>
+		<name>now</name>
+		<function-class>net.ion.webapp.utils.Function</function-class>
+		<function-signature>java.util.Date now()</function-signature>
+	</function>
+	<function>
+		<description>addDays</description>
+		<name>addMinutes</name>
+		<function-class>org.apache.commons.lang.time.DateUtils</function-class>
+		<function-signature>java.util.Date addMinutes(java.util.Date, int)</function-signature>
+	</function>
+	<function>
+		<description>addDays</description>
+		<name>addDays</name>
+		<function-class>org.apache.commons.lang.time.DateUtils</function-class>
+		<function-signature>java.util.Date addDays(java.util.Date, int)</function-signature>
+	</function>
+	<function>(date, amount)
+		<description>Aes decrypt</description>
+		<name>aes</name>
+		<function-class>net.ion.webapp.utils.Aes</function-class>
+		<function-signature>java.lang.String decrypt(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>Aes decrypt security</description>
+		<name>security</name>
+		<function-class>net.ion.webapp.utils.Aes</function-class>
+		<function-signature>java.lang.String
+			security(java.lang.String,java.lang.String)
+		</function-signature>
+	</function>
+	<function>
+		<description>leftPad</description>
+		<name>leftPad</name>
+		<function-class>org.apache.commons.lang.StringUtils</function-class>
+		<function-signature>java.lang.String leftPad(java.lang.String,int,java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>fileId</description>
+		<name>fileId</name>
+		<function-class>net.ion.webapp.utils.IslimUtils</function-class>
+		<function-signature>java.lang.String getFileId(java.lang.String, java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>orgFileId</description>
+		<name>orgFileId</name>
+		<function-class>net.ion.webapp.utils.IslimUtils</function-class>
+		<function-signature>java.lang.String getOrgFileId(java.lang.String, java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>fileName</description>
+		<name>fileName</name>
+		<function-class>net.ion.webapp.utils.IslimUtils</function-class>
+		<function-signature>java.lang.String getFileName(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>URLDecoder</description>
+		<name>urlDec</name>
+		<function-class>java.net.URLDecoder</function-class>
+		<function-signature>java.lang.String decode(java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+
+</taglib>

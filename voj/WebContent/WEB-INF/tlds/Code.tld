@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+
+	<description>JSTL 1.1 Code library</description>
+	<display-name>JSTL code</display-name>
+	<tlib-version>1.1</tlib-version>
+	<short-name>code</short-name>
+	<uri>http://voj.or.kr/jsp/jstl/code</uri>
+
+
+	<function>
+		<name>name</name>
+		<description>code name</description>
+		<function-class>net.ion.webapp.db.CodeUtils</function-class>
+		<function-signature>java.lang.String getName(java.lang.String,java.lang.String, java.lang.String)</function-signature>
+	</function>
+	<function>
+		<name>nameAuto</name>
+		<description>code name</description>
+		<function-class>net.ion.webapp.db.CodeUtils</function-class>
+		<function-signature>java.lang.String getNameAuto(java.lang.String, java.lang.String, java.lang.String)</function-signature>
+	</function>
+	<!-- <function> <name>name</name> <description>code name</description> <function-class>net.ion.webapp.db.CodeUtils</function-class> 
+		<function-signature>java.lang.String getName(java.lang.String, java.lang.String)</function-signature> 
+		</function> -->
+	<function>
+		<name>ref</name>
+		<description>code ref value</description>
+		<function-class>net.ion.webapp.db.CodeUtils</function-class>
+		<function-signature>java.lang.String getReferenceValue(java.lang.String, java.lang.String)</function-signature>
+	</function>
+	<function>
+		<name>codeInfo</name>
+		<description>mapping code info</description>
+		<function-class>net.ion.webapp.db.CodeUtils</function-class>
+		<function-signature>java.lang.Map getCodeInfo(java.lang.String, java.lang.String)</function-signature>
+	</function>
+	<function>
+		<name>list</name>
+		<description>code list</description>
+		<function-class>net.ion.webapp.db.CodeUtils</function-class>
+		<function-signature>java.lang.List getList(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<name>lang</name>
+		<description>Message</description>
+		<function-class>net.ion.webapp.db.Lang</function-class>
+		<function-signature>java.lang.String getMessage(java.lang.String,java.lang.String, java.lang.String)</function-signature>
+	</function>
+	<function>
+		<name>replaceLang</name>
+		<description>Message ${code:replaceLang('contents_nm', lang, '"100,000",5', '테스트 가격 {0}원 / 건수 {1}') }</description>
+		<function-class>net.ion.webapp.db.Lang</function-class>
+		<function-signature>java.lang.String replaceLang(java.lang.String,java.lang.String, java.lang.String, java.lang.String)</function-signature>
+	</function>
+	<function>
+		<name>cName</name>
+		<description>category name</description>
+		<function-class>net.ion.webapp.db.CodeUtils</function-class>
+		<function-signature>java.lang.String getCateName(java.lang.String, java.lang.String)</function-signature>
+	</function>
+</taglib>

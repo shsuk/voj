@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.0" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd">
+	<description>JSTL 1.1 Math library</description>
+	<display-name>JSTL math</display-name>
+	<tlib-version>1.1</tlib-version>
+	<short-name>f</short-name>
+	<uri>http://voj.or.kr/jsp/jstl/math</uri>
+	<tag>
+		<name>set</name>
+		<tag-class>net.ion.webapp.controller.tag.ui.SetTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Ui 설정</description>
+		<attribute>
+			<name>id</name>
+			<description>설정 대상 궈리 아이디</description>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>hiddens</name>
+			<description>hidden으로 설정할 필드</description>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>read_onlys</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>read_onlys2</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>images</name>
+			<description>이미지로 표시할 필드</description>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>files</name>
+			<description>첨부파일로 표시할 필드</description>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>pk</name>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>sort</name>
+			<description>정렬가능한 컬럼으로 설정</description>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>token</name>
+			<description>폼의 토큰키 값을 지정한다.</description>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>singleRow</name>
+			<description>상세형</description>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+	</tag>
+	<tag>
+		<name>param</name>
+		<tag-class>net.ion.webapp.controller.tag.ui.ParamTag</tag-class>
+		<body-content>scriptless</body-content>
+		<description>검색 조건 설정</description>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	<tag>
+		<name>thymeleaf</name>
+		<tag-class>net.ion.webapp.controller.tag.ThymeleafTag</tag-class>
+		<body-content>scriptless</body-content>
+		<description>thymeleaf</description>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+
+</taglib>

@@ -1,0 +1,27 @@
+INSERT INTO workflow_process_tbl(
+	wf_proc_id,
+	wf_id,
+	wf_proc_name,
+	wf_proc_path,
+	view_script,
+	job_type,
+	retry_cnt,
+	waite_time,
+	run_memo,
+	order_no,
+	use_yn,
+	mod_user
+)VALUES(
+	sid.nextval,
+	@{wf_id},
+	@{wf_proc_name},
+	@{wf_proc_path},
+	@{view_script},
+	@{job_type},
+	@{retry_cnt},
+	@{waite_time}
+	@{run_memo},
+	@{order_no},
+	@{use_yn},
+	@{session.user_id}
+)

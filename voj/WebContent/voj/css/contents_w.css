@@ -1,0 +1,14 @@
+html,body {
+	margin: 0px;
+	padding: 0px;
+	font-size :13px;
+}
+.main_body{font-size :13px;}
+
+.top_menu .top_menu_item {display: inline-block;cursor: pointer;;margin: 0px;}
+.sub_menu_list a{color: #a39c97;font: bold;font-size: 12px;letter-spacing: 1px;}
+.sub_cube{width: 220px;}
+.sub_cube table{width: 100%;}
+div.d_ib{ float: left; }
+.bd_title{ background: url('../images/bd_bg.jpg') no-repeat 550px 140px;}
+.bd_body{width: 940px;margin-left: 30px;}

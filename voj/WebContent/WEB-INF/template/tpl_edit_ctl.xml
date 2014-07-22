@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<controls>
+	<control type="root"><![CDATA[
+<%@ page contentType="text/html; charset=utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
+<%@ taglib prefix="uf" uri="/WEB-INF/tlds/fnc.tld"%>
+<%@ taglib prefix="code" uri="/WEB-INF/tlds/Code.tld"%>
+
+<c:choose >
+	<c:when test="${req.action=='u' }">
+		<uf:organism>[
+			<uf:job id="row" jobId="db" query="xxxx"/>
+		]</uf:organism>
+		
+		<c:set var="JSON" scope="request" value="${JSON }"/>
+		<jsp:forward page="../action_return.jsp"  />
+	</c:when>
+	<c:when test="${req.action=='i' }">
+		<uf:organism>[
+			<uf:job id="row" jobId="db" query="xxxx"/>
+		]</uf:organism>
+	
+		<c:set var="JSON" scope="request" value="${JSON }"/>
+		<jsp:forward page="../action_return.jsp"  />
+	</c:when>
+</c:choose>
+
+<uf:organism desc="사용방법은 다음 URL 참조 at.sh?_ps=admin/test_menu">[
+	<uf:job id="row" jobId="db" query="#qyery_id#" singleRow="true"/>
+]</uf:organism>
+
+<jsp:include page="../seller_layout.jsp" >
+	<jsp:param name="gnb" value="stat"/>
+	<jsp:param name="lnb_idx" value="09"/>
+	<jsp:param name="lnb_dc" value="stat_sel"/>
+	<jsp:param name="lnb_c" value=""/>
+</jsp:include>
+
+<script type="text/javascript">
+	$(function() {
+		$('#save_btn').button({icons: {primary: "ui-icon-disk"}}).click(function(){
+			form_submit();
+		});
+		$('#edit_btn').button({icons: {primary: "ui-icon-pencil"}}).click(function(){
+			edit();
+		});
+		$('#list_btn').button({icons: {primary: "ui-icon-icon-folder-open"}}).click(function(){
+			list();
+		});
+	});
+	
+	function edit(){
+		var url = 'at.sh?xxxx';
+		alert('url을 설정하세요');
+		var target_layer = $('#body_main').parent();
+		
+		target_layer.hide("fade");
+		target_layer.show("fade");
+		target_layer.load(url+'&_layout=n');
+	}
+	function list(){
+		var url = 'at.sh?xxxx';
+		alert('url을 설정하세요');
+		var target_layer = $('#body_main').parent();
+		
+		target_layer.hide("fade");
+		target_layer.show("fade");
+		target_layer.load(url+'&_layout=n');
+	}
+		
+	function form_submit(){
+		var form = $('#main_form');
+		if(form.attr('isSubmit')==='true') return false;
+		//폼 정합성 체크
+		var isSuccess = $.valedForm($('[valid]',form));
+		if(!isSuccess) return false;
+		
+		var formData =$(form).serializeArray();
+
+		var url = 'at.sh?action=u&_ps=${req._ps}';
+		alert('url을 설정하세요');
+		
+		if($(form).attr('isSubmit')==='true') return false;
+		$(form).attr('isSubmit',true);
+	
+		$.post(url, formData, function(response, textStatus, xhr){
+			$(form).attr('isSubmit',false);
+	
+			var data = $.parseJSON(response);
+	
+			if(data.success){
+				alert("성공메세지 작성");
+			}else{
+				alert("처리하는 중 오류가 발생하였습니다. \n문제가 지속되면 관리자에게 문의 하세요.\n" + data.error_message);
+			}
+		});
+		return false;
+	}
+</script>
+
+<div  id="body_main">
+	<form id="main_form" name="main_form" action="" onsubmit="return form_submit()">
+		<table class="${tpl_class_table}">
+			#{loop}#
+		</table>
+	</form>
+	<div id="save_btn" class="btn-r">저장</div>
+	<div id="edit_btn" class="btn-r">수정</div>
+	<div id="list_btn" class="btn-r">목록</div>
+</div>
+	]]></control>
+	<control type="loop"><![CDATA[
+		<tr>
+			<th class="${tpl_class_table_header}" title="#name#">#label#</th>
+			<td>
+#value#
+			</td>
+		</tr>
+	]]></control>
+	<control type="radio"><![CDATA[
+				<c:set scope="request" var="group_id" value="#name#"/>
+				<c:set scope="request" var="name" value="#name#"/>
+				<c:set scope="request" var="selected" value="${row['#name#']}"/>
+				<c:set scope="request" var="att" value=" "/>
+				<c:set scope="request" var="valid" value="[#valid#]"/>
+				<jsp:include page="../../system/tpl/radio_button.jsp"/>
+	]]></control>
+	<control type="check"><![CDATA[
+				<c:set scope="request" var="group_id" value="#name#"/>
+				<c:set scope="request" var="name" value="#name#"/>
+				<c:set scope="request" var="selected" value="${row['#name#']}"/>
+				<c:set scope="request" var="att" value=" "/>
+				<c:set scope="request" var="valid" value="[#valid#]"/>
+				<jsp:include page="../../system/tpl/check_box.jsp"/>
+	]]></control>
+	<control type="select1"><![CDATA[
+				<c:set scope="request" var="group_id" value="#name#"/>
+				<c:set scope="request" var="name" value="#name#"/>
+				<c:set scope="request" var="selected" value="${row['#name#']}"/>
+				<c:set scope="request" var="att" value=" "/>
+				<c:set scope="request" var="valid" value="[#valid#]"/>
+				<c:set scope="request" var="emptyText" value="#label#을(를) 선택하세요."/>
+				<jsp:include page="../../system/tpl/select_box.jsp"/>
+	]]></control>
+	<control type="file_image"><![CDATA[
+				<c:set scope="request" var="name" value="#name#"/>
+				<c:set scope="request" var="value" value="${row['#name#']}"/>
+				<c:set scope="request" var="att" value=" "/>
+				<c:set scope="request" var="valid" value="[#valid#]"/>
+				<jsp:include page="../../system/tpl/file_image.jsp"/>
+	]]></control>
+	<control type="file"><![CDATA[
+				<c:set scope="request" var="name" value="#name#"/>
+				<c:set scope="request" var="value" value="${row['#name#']}"/>
+				<c:set scope="request" var="file_name" value="값을넣으세요."/>
+				<c:set scope="request" var="att" value=" "/>
+				<c:set scope="request" var="valid" value="[#valid#]"/>
+				<jsp:include page="../../system/tpl/file.jsp"/>
+	]]></control>
+	<control type="file_images"><![CDATA[
+				<div id="#name#s" style="float: left; width: 200px;">
+					<c:set scope="request" var="name" value="#name#"/>
+					<c:set scope="request" var="value" value="${row['#name#']}"/>
+					<c:set scope="request" var="att" value=" "/>
+					<c:set scope="request" var="valid" value="[#valid#]"/>
+					<c:set scope="request" var="ref_tbl" value="xxxx"/>
+					<jsp:include page="../../system/tpl/file_image.jsp"/>
+				</div>
+				<div id="add_file_btn" style="cursor: pointer;float: left;" onclick="add_file_#name#()">파일추가</div>
+				<script type="text/javascript">
+				
+					if('${ref_tbl}'=='xxxx'){
+						alert('ref_tbl 값이 설정되지 않았습니다. 설정하고 이코드를 삭제하세요.');
+					}
+
+					var #name#_idx=0;
+					function add_file_#name#(){
+						#name#_idx++;
+						var ctlName = '#name#';
+						var id = ctlName + '_' + #name#_idx;
+						$('##name#s').append('<div id=\"'+id+'\"></div>');
+						
+						$('#'+id).load('at.sh?_ps=system/tpl/file_image&name='+ctlName+'&ref_tbl=${ref_tbl}');
+						
+						return false;
+					}
+				</script>
+	]]></control>
+	<control type="files"><![CDATA[
+				<div id="#name#s" style="float: left;width: 200px;">
+					<c:set scope="request" var="name" value="#name#"/>
+					<c:set scope="request" var="value" value="${row['#name#']}"/>
+					<c:set scope="request" var="att" value=" "/>
+					<c:set scope="request" var="valid" value="[#valid#]"/>
+					<c:set scope="request" var="ref_tbl" value="xxxx"/>
+					<jsp:include page="../../system/tpl/file.jsp"/>
+				</div>
+				<div id="add_file_btn" style="cursor: pointer;float: left;" onclick="add_file_#name#()">파일추가</div>
+				<script type="text/javascript">
+				
+					if('${ref_tbl}'=='xxxx'){
+						alert('ref_tbl 값이 설정되지 않았습니다. 설정하고 이코드를 삭제하세요.');
+					}
+					
+					var #name#_idx=0;
+					function add_file_#name#(){
+						#name#_idx++;
+						var ctlName = '#name#';
+						var id = ctlName + '_' + #name#_idx;
+						$('##name#s').append('<div id=\"'+id+'\"></div>');
+						
+						$('#'+id).load('at.sh?_ps=system/tpl/file_image&name='+ctlName+'&ref_tbl=${ref_tbl}');
+						
+						return false;
+					}
+				</script>
+	]]></control>
+	<control type="number"><![CDATA[
+				<input type="text" id="#name#" name="#name#" value="${row['#name#']}"  class="spinner" valid="[#valid#]" >
+	]]></control>
+	<control type="date"><![CDATA[
+				<input type="text" id="#name#" name="#name#" value="${row['#name#']}" class="datepicker"  valid="[#valid#]" >	
+	]]></control>
+	<control type="default"><![CDATA[
+				<input type="text" id="#name#" name="#name#" value="${fn:escapeXml(row['#name#'])}"  valid="[#valid#]">	
+	]]></control>
+	
+	<control type="r_number"><![CDATA[
+				<fmt:formatNumber value="${row['#name#']}" type="number" />
+	]]></control>
+	<control type="r_date"><![CDATA[
+				<fmt:formatDate value="${row['#name#']}" pattern="yyyy-MM-dd HH:mm:ss" />
+	]]></control>
+	<control type="r_codee"><![CDATA[
+				${code:name('#name#', row['#name#'], lang)}
+	]]></control>
+	<control type="r_default"><![CDATA[
+				${uf:escapeXml(row['#name#']) }
+	]]></control>
+
+	<control type="hidden"><![CDATA[
+				<input type="hidden" id="#name#" name="#name#" value="${fn:escapeXml(row['#name#'])}"  valid="[#valid#]" >	
+	]]></control>
+
+</controls>

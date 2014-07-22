@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:context="http://www.springframework.org/schema/context" xmlns:jee="http://www.springframework.org/schema/jee"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	<bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>/WEB-INF/config/islim.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	
+	<context:annotation-config />
+ 
+	<context:component-scan base-package="net.ion.webapp.service"/>
+	<context:component-scan base-package="net.ion.webapp.processor"/>
+	<context:component-scan base-package="net.ion.user.processor"/>
+
+	<!-- Thymeleaf -->
+ 	<bean id="templateResolver"
+		class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+		<property name="prefix" value="${viewResolver.prefix}" />
+		<property name="suffix" value=".html" />
+		<property name="cacheTTLMs" value="2000"/>
+		<property name="templateMode" value="HTML5" />
+	</bean>
+	<bean id="templateEngine" class="org.thymeleaf.spring3.SpringTemplateEngine">
+		<property name="templateResolver" ref="templateResolver" />
+	</bean>
+	<!-- Thymeleaf -->
+ 
+	<bean id="workflowService" class="net.ion.webapp.workflow.WorkflowService"/>
+	
+	<bean id="repositorySFtpAdapter" class="net.ion.webapp.adapter.RepositorySFtpAdapter">
+		<property name="server" value="${rep.sftp.server}"/>
+		<property name="port" value="${rep.sftp.port}"/>
+		<property name="userId" value="${rep.sftp.userId}"/>
+		<property name="password" value="${rep.sftp.password}"/>
+		<property name="root" value="${rep.sftp.root}"/>
+	</bean>
+	<bean id="repositoryFileAdapter" class="net.ion.webapp.adapter.RepositoryFileAdapter">
+		<property name="repositoryPath" value="${rep.repositoryPath}"/>
+	</bean>
+	
+	<bean id="processInitialization" class="net.ion.webapp.process.ProcessInitialization">
+		<property name="queryPath" value="/WEB-INF/sql"/>
+		<property name="viewResolverPath" value="${viewResolver.prefix}"/>
+		<property name="dsName" value="dataSource"/>
+		<property name="repositoryAdapter" ref="${rep.adapter}"/>
+		<property name="tempDir" value="${upload.dir}"/>
+	</bean>
+	
+	<bean id="aes" class="net.ion.webapp.utils.Aes">
+		<property name="key" value="${aes.key}"/>
+	</bean>
+	
+	<aop:aspectj-autoproxy/>	
+	<tx:annotation-driven transaction-manager="txManager"/>
+
+ 	<!-- maxActive를 ThreadPoolTaskExecutor Pool 사이즈 보다 충분히 크게 잡으세요. 
+ 		  오래 걸리는 작업이 많은 경우 작으면 웹에서 대기상태에가 발생할 수 있습니다. -->
+	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="10" />
+		<property name="maxPoolSize" value="11" />
+		<property name="queueCapacity" value="5" />
+	</bean>
+
+
+
+	
+	<bean id="db" class="kr.or.voj.webapp.processor.DBProcessorService" >
+	</bean>
+	<bean id="processorServiceFactory" class="kr.or.voj.webapp.processor.ProcessorServiceFactory" >
+		<property name="queryPath" value="/WEB-INF/sql"/>
+	</bean>
+	
+
+</beans>

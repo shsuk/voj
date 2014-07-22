@@ -1,0 +1,621 @@
+
+
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="./favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+<link href="./jquery/mobile/css/themes/default/jquery.mobile-1.2.1.css"
+	rel="stylesheet" type="text/css" />
+<link href="./jquery/mobile/docs/_assets/css/jqm-docs.css"
+	rel="stylesheet" />
+
+<script src="./jquery/mobile/js/jquery.js"></script>
+<script src="./jquery/mobile/js/jquery.mobile-1.2.1.js"></script>
+
+<script src="./js/commonUtil.js"></script>
+<script type="text/javascript">
+
+function win_load(param, title, options){
+	alert(1);
+	document.location.href = 'atm.sh?'+param;
+}
+function view(_q,param){
+	alert(2);
+	document.location.href = 'atm.sh?_t=view&_q='+_q+'&'+param;
+}
+
+</script>
+</head>
+<body
+	style="border: 0px; overflow: auto; margin: 0 0 0 0; padding: 0 0 0 0;">
+
+	<div data-role="page" class="type-interior" id="main_page">
+		<div data-role="header" data-theme="f">
+			<img src="./images/log.png" height="60" border="0">
+		</div>
+		<!-- /header -->
+		<div data-role="content" class="jqm-content">
+
+
+
+
+
+
+
+
+
+
+
+
+			<script type="text/javascript">
+$(function() {
+	try {
+		selectTab('');
+	} catch (e) { }
+});
+</script>
+
+
+			<div data-role="collapsible-set" data-inset="false">
+
+
+
+
+
+
+
+
+				<form name="system/wf/job_list.workflow_tbl" action="at.sh" class=""
+					onsubmit="return enter_event();">
+					<div data-role="collapsible" data-collapsed="false" data-theme="b"
+						data-content-theme="d">
+						<h3>워크플로우 설정</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+						<input type="hidden" name="_params_insert" value=""> <input
+							type="hidden" name="_params_update" value=""> <input
+							type="hidden" name="_params_delete" value=""> <input
+							type="hidden" name="_button_edit" value=""> <input
+							type="hidden" name="_button_add" value=""> <input
+							type="hidden" name="_sort_key" value=""> <input
+							type="hidden" name="_sort_val" value=""> <input
+							type="hidden" name="_sort_opt" value=""> <input
+							type="hidden" name="listCount" value=""> <input
+							type="hidden" name="pageNo" value=""> <input
+							type="hidden" name="_q" value="system/wf/job_list"> <input
+							type="hidden" name="_t" value="list"> <input
+							type="hidden" name="_tab" value="" /> <input type="hidden"
+							name="_ds" value="" /> <input type="hidden"
+							name="__ISLIM_TOKEN__"
+							value="21f015cb-3254-4cf6-8fd8-29e1f8cfa206" />
+
+
+
+
+
+
+						<ul data-role="listview" data-theme="c">
+
+
+
+
+							<li><a href="javascript:" onclick="javascript:"><h3>
+										<span style="text-align: center;" name="wf_job_id" val="">20000675</span>
+									</h3></a> <a href="javascript:" onclick="javascript:"><h3>
+										<span name="src_id" val="">20000560</span>
+									</h3></a> <a
+								href="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"><h3>
+										<span style="text-align: center;" name="wf_job_id" val="">20000675</span>
+									</h3> <span name="wf_name" val="">시스템코드 변경</span> <span
+									name="current_wf_proc_name" val="">SMS</span> <input
+									name="view_script"
+									value="win_load('_ps=at/at&_q=system/code/edit&_t=view&rid=${row.src_id}', '[상세정보] 작업대상 아이디 : ${row.src_id}', {width:800, height:410, resizable: true})"
+									type="hidden" /> <span style="text-align: center;"
+									name="last_run_dt" val="">2013-08-23 11:21:23</span> <span
+									style="text-align: center;" name="reg_dt" val="">2013-08-23
+										11:19:05</span> <span title="ERR" style="text-align: center;"
+									name="job_status" val="">작업실패</span> <span
+									style="text-align: center;" name="working_id" val=""></span> <span
+									style="text-align: right;" name="retry_cnt" val="">2</span> <span
+									style="text-align: right;" name="next_run_time" val=""></span>
+									<span name="listcount" val="">15</span> <span name="pageno"
+									val="">1</span> <span style="text-align: right;"
+									name="totcount" val="">77</span> </a> <a
+								href="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"><h3>
+										<span name="src_id" val="">20000560</span>
+									</h3></a></li>
+
+
+							<li><a
+								href="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"><h3>
+										<span style="text-align: center;" name="wf_job_id" val="">20000675</span>
+									</h3> <span style="text-align: center;" name="wf_job_id" val="">20000673</span>
+									<span name="wf_name" val="">시스템코드 변경</span> <span
+									name="src_id" val="">383</span> <span
+									name="current_wf_proc_name" val="">SMS</span> <input
+									name="view_script"
+									value="win_load('_ps=at/at&_q=system/code/edit&_t=view&rid=${row.src_id}', '[상세정보] 작업대상 아이디 : ${row.src_id}', {width:800, height:410, resizable: true})"
+									type="hidden" /> <span style="text-align: center;"
+									name="last_run_dt" val="">2013-08-23 09:45:13</span> <span
+									style="text-align: center;" name="reg_dt" val="">2013-08-23
+										09:42:39</span> <span title="ERR" style="text-align: center;"
+									name="job_status" val="">작업실패</span> <span
+									style="text-align: center;" name="working_id" val=""></span> <span
+									style="text-align: right;" name="retry_cnt" val="">2</span> <span
+									style="text-align: right;" name="next_run_time" val=""></span>
+									<span name="listcount" val="">15</span> <span name="pageno"
+									val="">1</span> <span style="text-align: right;"
+									name="totcount" val="">77</span> </a> <a
+								href="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"><h3>
+										<span name="src_id" val="">20000560</span>
+									</h3></a></li>
+
+
+							<li><a
+								href="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"><h3>
+										<span style="text-align: center;" name="wf_job_id" val="">20000675</span>
+									</h3> <span style="text-align: center;" name="wf_job_id" val="">20000671</span>
+									<span name="wf_name" val="">시스템코드 변경</span> <span
+									name="src_id" val="">383</span> <span
+									name="current_wf_proc_name" val="">SMS</span> <input
+									name="view_script"
+									value="win_load('_ps=at/at&_q=system/code/edit&_t=view&rid=${row.src_id}', '[상세정보] 작업대상 아이디 : ${row.src_id}', {width:800, height:410, resizable: true})"
+									type="hidden" /> <span style="text-align: center;"
+									name="last_run_dt" val="">2013-08-23 09:42:13</span> <span
+									style="text-align: center;" name="reg_dt" val="">2013-08-23
+										09:39:54</span> <span title="ERR" style="text-align: center;"
+									name="job_status" val="">작업실패</span> <span
+									style="text-align: center;" name="working_id" val=""></span> <span
+									style="text-align: right;" name="retry_cnt" val="">2</span> <span
+									style="text-align: right;" name="next_run_time" val=""></span>
+									<span name="listcount" val="">15</span> <span name="pageno"
+									val="">1</span> <span style="text-align: right;"
+									name="totcount" val="">77</span> </a> <a
+								href="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"><h3>
+										<span name="src_id" val="">20000560</span>
+									</h3></a></li>
+
+
+							<li><a
+								href="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"><h3>
+										<span style="text-align: center;" name="wf_job_id" val="">20000675</span>
+									</h3> <span style="text-align: center;" name="wf_job_id" val="">20000669</span>
+									<span name="wf_name" val="">시스템코드 변경</span> <span
+									name="src_id" val="">383</span> <span
+									name="current_wf_proc_name" val="">SMS</span> <input
+									name="view_script"
+									value="win_load('_ps=at/at&_q=system/code/edit&_t=view&rid=${row.src_id}', '[상세정보] 작업대상 아이디 : ${row.src_id}', {width:800, height:410, resizable: true})"
+									type="hidden" /> <span style="text-align: center;"
+									name="last_run_dt" val="">2013-08-23 09:39:13</span> <span
+									style="text-align: center;" name="reg_dt" val="">2013-08-23
+										09:37:03</span> <span title="ERR" style="text-align: center;"
+									name="job_status" val="">작업실패</span> <span
+									style="text-align: center;" name="working_id" val=""></span> <span
+									style="text-align: right;" name="retry_cnt" val="">2</span> <span
+									style="text-align: right;" name="next_run_time" val=""></span>
+									<span name="listcount" val="">15</span> <span name="pageno"
+									val="">1</span> <span style="text-align: right;"
+									name="totcount" val="">77</span> </a> <a
+								href="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"><h3>
+										<span name="src_id" val="">20000560</span>
+									</h3></a></li>
+
+
+							<li><a
+								href="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"><h3>
+										<span style="text-align: center;" name="wf_job_id" val="">20000675</span>
+									</h3> <span style="text-align: center;" name="wf_job_id" val="">20000667</span>
+									<span name="wf_name" val="">시스템코드 변경</span> <span
+									name="src_id" val="">383</span> <span
+									name="current_wf_proc_name" val="">SMS</span> <input
+									name="view_script"
+									value="win_load('_ps=at/at&_q=system/code/edit&_t=view&rid=${row.src_id}', '[상세정보] 작업대상 아이디 : ${row.src_id}', {width:800, height:410, resizable: true})"
+									type="hidden" /> <span style="text-align: center;"
+									name="last_run_dt" val="">2013-08-23 09:36:13</span> <span
+									style="text-align: center;" name="reg_dt" val="">2013-08-23
+										09:33:27</span> <span title="ERR" style="text-align: center;"
+									name="job_status" val="">작업실패</span> <span
+									style="text-align: center;" name="working_id" val=""></span> <span
+									style="text-align: right;" name="retry_cnt" val="">2</span> <span
+									style="text-align: right;" name="next_run_time" val=""></span>
+									<span name="listcount" val="">15</span> <span name="pageno"
+									val="">1</span> <span style="text-align: right;"
+									name="totcount" val="">77</span> </a> <a
+								href="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"><h3>
+										<span name="src_id" val="">20000560</span>
+									</h3></a></li>
+
+
+							<li><a
+								href="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"><h3>
+										<span style="text-align: center;" name="wf_job_id" val="">20000675</span>
+									</h3> <span style="text-align: center;" name="wf_job_id" val="">20000665</span>
+									<span name="wf_name" val="">시스템코드 변경</span> <span
+									name="src_id" val="">383</span> <span
+									name="current_wf_proc_name" val="">SMS</span> <input
+									name="view_script"
+									value="win_load('_ps=at/at&_q=system/code/edit&_t=view&rid=${row.src_id}', '[상세정보] 작업대상 아이디 : ${row.src_id}', {width:800, height:410, resizable: true})"
+									type="hidden" /> <span style="text-align: center;"
+									name="last_run_dt" val="">2013-08-23 09:34:19</span> <span
+									style="text-align: center;" name="reg_dt" val="">2013-08-23
+										09:32:47</span> <span title="ERR" style="text-align: center;"
+									name="job_status" val="">작업실패</span> <span
+									style="text-align: center;" name="working_id" val=""></span> <span
+									style="text-align: right;" name="retry_cnt" val="">2</span> <span
+									style="text-align: right;" name="next_run_time" val=""></span>
+									<span name="listcount" val="">15</span> <span name="pageno"
+									val="">1</span> <span style="text-align: right;"
+									name="totcount" val="">77</span> </a> <a
+								href="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"><h3>
+										<span name="src_id" val="">20000560</span>
+									</h3></a></li>
+
+
+							<li><a
+								href="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"><h3>
+										<span style="text-align: center;" name="wf_job_id" val="">20000675</span>
+									</h3> <span style="text-align: center;" name="wf_job_id" val="">20000663</span>
+									<span name="wf_name" val="">시스템코드 변경</span> <span
+									name="src_id" val="">383</span> <span
+									name="current_wf_proc_name" val="">SMS</span> <input
+									name="view_script"
+									value="win_load('_ps=at/at&_q=system/code/edit&_t=view&rid=${row.src_id}', '[상세정보] 작업대상 아이디 : ${row.src_id}', {width:800, height:410, resizable: true})"
+									type="hidden" /> <span style="text-align: center;"
+									name="last_run_dt" val="">2013-08-23 09:33:13</span> <span
+									style="text-align: center;" name="reg_dt" val="">2013-08-23
+										09:30:23</span> <span title="ERR" style="text-align: center;"
+									name="job_status" val="">작업실패</span> <span
+									style="text-align: center;" name="working_id" val=""></span> <span
+									style="text-align: right;" name="retry_cnt" val="">2</span> <span
+									style="text-align: right;" name="next_run_time" val=""></span>
+									<span name="listcount" val="">15</span> <span name="pageno"
+									val="">1</span> <span style="text-align: right;"
+									name="totcount" val="">77</span> </a> <a
+								href="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"><h3>
+										<span name="src_id" val="">20000560</span>
+									</h3></a></li>
+
+
+							<li><a
+								href="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"><h3>
+										<span style="text-align: center;" name="wf_job_id" val="">20000675</span>
+									</h3> <span style="text-align: center;" name="wf_job_id" val="">20000659</span>
+									<span name="wf_name" val="">시스템코드 변경</span> <span
+									name="src_id" val="">363</span> <span
+									name="current_wf_proc_name" val="">SMS</span> <input
+									name="view_script"
+									value="win_load('_ps=at/at&_q=system/code/edit&_t=view&rid=${row.src_id}', '[상세정보] 작업대상 아이디 : ${row.src_id}', {width:800, height:410, resizable: true})"
+									type="hidden" /> <span style="text-align: center;"
+									name="last_run_dt" val="">2013-08-20 14:58:36</span> <span
+									style="text-align: center;" name="reg_dt" val="">2013-08-20
+										14:56:28</span> <span title="ERR" style="text-align: center;"
+									name="job_status" val="">작업실패</span> <span
+									style="text-align: center;" name="working_id" val=""></span> <span
+									style="text-align: right;" name="retry_cnt" val="">2</span> <span
+									style="text-align: right;" name="next_run_time" val=""></span>
+									<span name="listcount" val="">15</span> <span name="pageno"
+									val="">1</span> <span style="text-align: right;"
+									name="totcount" val="">77</span> </a> <a
+								href="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"><h3>
+										<span name="src_id" val="">20000560</span>
+									</h3></a></li>
+
+
+							<li><a
+								href="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"><h3>
+										<span style="text-align: center;" name="wf_job_id" val="">20000675</span>
+									</h3> <span style="text-align: center;" name="wf_job_id" val="">20000648</span>
+									<span name="wf_name" val="">시스템코드 변경</span> <span
+									name="src_id" val="">20000560</span> <span
+									name="current_wf_proc_name" val="">SMS</span> <input
+									name="view_script"
+									value="win_load('_ps=at/at&_q=system/code/edit&_t=view&rid=${row.src_id}', '[상세정보] 작업대상 아이디 : ${row.src_id}', {width:800, height:410, resizable: true})"
+									type="hidden" /> <span style="text-align: center;"
+									name="last_run_dt" val="">2013-08-16 13:28:03</span> <span
+									style="text-align: center;" name="reg_dt" val="">2013-08-16
+										13:25:30</span> <span title="ERR" style="text-align: center;"
+									name="job_status" val="">작업실패</span> <span
+									style="text-align: center;" name="working_id" val=""></span> <span
+									style="text-align: right;" name="retry_cnt" val="">2</span> <span
+									style="text-align: right;" name="next_run_time" val=""></span>
+									<span name="listcount" val="">15</span> <span name="pageno"
+									val="">1</span> <span style="text-align: right;"
+									name="totcount" val="">77</span> </a> <a
+								href="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"><h3>
+										<span name="src_id" val="">20000560</span>
+									</h3></a></li>
+
+
+							<li><a
+								href="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"><h3>
+										<span style="text-align: center;" name="wf_job_id" val="">20000675</span>
+									</h3> <span style="text-align: center;" name="wf_job_id" val="">20000580</span>
+									<span name="wf_name" val="">시스템코드 변경</span> <span
+									name="src_id" val="">288</span> <span
+									name="current_wf_proc_name" val="">SMS</span> <input
+									name="view_script"
+									value="win_load('_ps=at/at&_q=system/code/edit&_t=view&rid=${row.src_id}', '[상세정보] 작업대상 아이디 : ${row.src_id}', {width:800, height:410, resizable: true})"
+									type="hidden" /> <span style="text-align: center;"
+									name="last_run_dt" val="">2013-07-24 17:06:33</span> <span
+									style="text-align: center;" name="reg_dt" val="">2013-07-24
+										17:05:11</span> <span title="ERR" style="text-align: center;"
+									name="job_status" val="">작업실패</span> <span
+									style="text-align: center;" name="working_id" val=""></span> <span
+									style="text-align: right;" name="retry_cnt" val="">2</span> <span
+									style="text-align: right;" name="next_run_time" val=""></span>
+									<span name="listcount" val="">15</span> <span name="pageno"
+									val="">1</span> <span style="text-align: right;"
+									name="totcount" val="">77</span> </a> <a
+								href="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"><h3>
+										<span name="src_id" val="">20000560</span>
+									</h3></a></li>
+
+
+							<li><a
+								href="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"><h3>
+										<span style="text-align: center;" name="wf_job_id" val="">20000675</span>
+									</h3> <span style="text-align: center;" name="wf_job_id" val="">20000571</span>
+									<span name="wf_name" val="">시스템코드 변경</span> <span
+									name="src_id" val="">kkk</span> <span
+									name="current_wf_proc_name" val="">SMS</span> <input
+									name="view_script"
+									value="win_load('_ps=at/at&_q=system/code/edit&_t=view&rid=${row.src_id}', '[상세정보] 작업대상 아이디 : ${row.src_id}', {width:800, height:410, resizable: true})"
+									type="hidden" /> <span style="text-align: center;"
+									name="last_run_dt" val="">2013-07-22 12:43:48</span> <span
+									style="text-align: center;" name="reg_dt" val="">2013-07-22
+										12:40:54</span> <span title="ERR" style="text-align: center;"
+									name="job_status" val="">작업실패</span> <span
+									style="text-align: center;" name="working_id" val=""></span> <span
+									style="text-align: right;" name="retry_cnt" val="">2</span> <span
+									style="text-align: right;" name="next_run_time" val=""></span>
+									<span name="listcount" val="">15</span> <span name="pageno"
+									val="">1</span> <span style="text-align: right;"
+									name="totcount" val="">77</span> </a> <a
+								href="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"><h3>
+										<span name="src_id" val="">20000560</span>
+									</h3></a></li>
+
+
+							<li><a
+								href="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"><h3>
+										<span style="text-align: center;" name="wf_job_id" val="">20000675</span>
+									</h3> <span style="text-align: center;" name="wf_job_id" val="">20000570</span>
+									<span name="wf_name" val="">시스템코드 변경</span> <span
+									name="src_id" val="">kkk</span> <span
+									name="current_wf_proc_name" val="">SMS</span> <input
+									name="view_script"
+									value="win_load('_ps=at/at&_q=system/code/edit&_t=view&rid=${row.src_id}', '[상세정보] 작업대상 아이디 : ${row.src_id}', {width:800, height:410, resizable: true})"
+									type="hidden" /> <span style="text-align: center;"
+									name="last_run_dt" val="">2013-07-22 12:40:48</span> <span
+									style="text-align: center;" name="reg_dt" val="">2013-07-22
+										12:38:23</span> <span title="ERR" style="text-align: center;"
+									name="job_status" val="">작업실패</span> <span
+									style="text-align: center;" name="working_id" val=""></span> <span
+									style="text-align: right;" name="retry_cnt" val="">2</span> <span
+									style="text-align: right;" name="next_run_time" val=""></span>
+									<span name="listcount" val="">15</span> <span name="pageno"
+									val="">1</span> <span style="text-align: right;"
+									name="totcount" val="">77</span> </a> <a
+								href="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"><h3>
+										<span name="src_id" val="">20000560</span>
+									</h3></a></li>
+
+
+							<li><a
+								href="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"><h3>
+										<span style="text-align: center;" name="wf_job_id" val="">20000675</span>
+									</h3> <span style="text-align: center;" name="wf_job_id" val="">20000565</span>
+									<span name="wf_name" val="">시스템코드 변경</span> <span
+									name="src_id" val="">20000560</span> <span
+									name="current_wf_proc_name" val="">SMS</span> <input
+									name="view_script"
+									value="win_load('_ps=at/at&_q=system/code/edit&_t=view&rid=${row.src_id}', '[상세정보] 작업대상 아이디 : ${row.src_id}', {width:800, height:410, resizable: true})"
+									type="hidden" /> <span style="text-align: center;"
+									name="last_run_dt" val="">2013-07-22 12:30:48</span> <span
+									style="text-align: center;" name="reg_dt" val="">2013-07-22
+										12:28:36</span> <span title="ERR" style="text-align: center;"
+									name="job_status" val="">작업실패</span> <span
+									style="text-align: center;" name="working_id" val=""></span> <span
+									style="text-align: right;" name="retry_cnt" val="">2</span> <span
+									style="text-align: right;" name="next_run_time" val=""></span>
+									<span name="listcount" val="">15</span> <span name="pageno"
+									val="">1</span> <span style="text-align: right;"
+									name="totcount" val="">77</span> </a> <a
+								href="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"><h3>
+										<span name="src_id" val="">20000560</span>
+									</h3></a></li>
+
+
+							<li><a
+								href="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"><h3>
+										<span style="text-align: center;" name="wf_job_id" val="">20000675</span>
+									</h3> <span style="text-align: center;" name="wf_job_id" val="">20000564</span>
+									<span name="wf_name" val="">시스템코드 변경</span> <span
+									name="src_id" val="">20000560</span> <span
+									name="current_wf_proc_name" val="">SMS</span> <input
+									name="view_script"
+									value="win_load('_ps=at/at&_q=system/code/edit&_t=view&rid=${row.src_id}', '[상세정보] 작업대상 아이디 : ${row.src_id}', {width:800, height:410, resizable: true})"
+									type="hidden" /> <span style="text-align: center;"
+									name="last_run_dt" val="">2013-07-22 12:27:24</span> <span
+									style="text-align: center;" name="reg_dt" val="">2013-07-22
+										12:25:03</span> <span title="ERR" style="text-align: center;"
+									name="job_status" val="">작업실패</span> <span
+									style="text-align: center;" name="working_id" val=""></span> <span
+									style="text-align: right;" name="retry_cnt" val="">2</span> <span
+									style="text-align: right;" name="next_run_time" val=""></span>
+									<span name="listcount" val="">15</span> <span name="pageno"
+									val="">1</span> <span style="text-align: right;"
+									name="totcount" val="">77</span> </a> <a
+								href="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"><h3>
+										<span name="src_id" val="">20000560</span>
+									</h3></a></li>
+
+
+							<li><a
+								href="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load('_q=system/wf/job_log_list&wf_job_id=20000675&_t=list', '20000675 (시스템코드 변경-)', {width:800, height:410, resizable: true})"><h3>
+										<span style="text-align: center;" name="wf_job_id" val="">20000675</span>
+									</h3> <span style="text-align: center;" name="wf_job_id" val="">20000544</span>
+									<span name="wf_name" val="">시스템코드 변경</span> <span
+									name="src_id" val="">288</span> <span
+									name="current_wf_proc_name" val="">SMS</span> <input
+									name="view_script"
+									value="win_load('_ps=at/at&_q=system/code/edit&_t=view&rid=${row.src_id}', '[상세정보] 작업대상 아이디 : ${row.src_id}', {width:800, height:410, resizable: true})"
+									type="hidden" /> <span style="text-align: center;"
+									name="last_run_dt" val="">2013-07-18 14:35:42</span> <span
+									style="text-align: center;" name="reg_dt" val="">2013-07-18
+										14:33:09</span> <span title="ERR" style="text-align: center;"
+									name="job_status" val="">작업실패</span> <span
+									style="text-align: center;" name="working_id" val=""></span> <span
+									style="text-align: right;" name="retry_cnt" val="">2</span> <span
+									style="text-align: right;" name="next_run_time" val=""></span>
+									<span name="listcount" val="">15</span> <span name="pageno"
+									val="">1</span> <span style="text-align: right;"
+									name="totcount" val="">77</span> </a> <a
+								href="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"
+								onclick="javascript:win_load(&#039;_ps=at/at&amp;_q=system/code/edit&amp;_t=view&amp;rid=20000560&#039;, &#039;[상세정보] 작업대상 아이디 : 20000560&#039;, {width:800, height:410, resizable: true})"><h3>
+										<span name="src_id" val="">20000560</span>
+									</h3></a></li>
+
+						</ul>
+
+
+						<br>
+
+
+
+
+
+
+
+						<div class="page_nevi" style="text-align: center;">
+							<script type="text/javascript">
+$(function() {
+	goPage_formName = 'system/wf/job_list.workflow_tbl';
+});
+</script>
+
+
+
+
+
+
+
+							<!-- 데이타가 있는 경우 -->
+
+
+
+
+
+
+
+							<!-- 이전 페이지 -->
+
+
+							<img src="images/btn_prev.gif" alt="이전" />&nbsp;
+
+
+
+							<!-- 페이지 네비게이션 -->
+
+
+
+							[1] . <a
+								href="javascript:goPage(2,'system/wf/job_list.workflow_tbl')">2</a>
+
+							. <a
+								href="javascript:goPage(3,'system/wf/job_list.workflow_tbl')">3</a>
+
+							. <a
+								href="javascript:goPage(4,'system/wf/job_list.workflow_tbl')">4</a>
+
+							. <a
+								href="javascript:goPage(5,'system/wf/job_list.workflow_tbl')">5</a>
+
+							. <a
+								href="javascript:goPage(6,'system/wf/job_list.workflow_tbl')">6</a>
+
+
+
+							<!-- 다음 페이지 -->
+							&nbsp; <img src="images/btn_next.gif" alt="다음" /> (77건)
+
+
+						</div>
+
+
+
+
+
+
+
+
+					</div>
+				</form>
+
+			</div>
+
+
+
+
+
+		</div>
+		<div data-role="footer" class="footer-docs" data-theme="c">
+			<p>Copyright shsuk. All right reserved.</p>
+		</div>
+	</div>
+
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+html,body {
+	margin: 0px;
+	padding: 0px;
+	font-size :16px;
+}
+.main_body{font-size :14px;}
+
+.m { display:none; }
+.page_nevi, .page_nevi a{font-size: 20px;}
+
+.bible_bg_b{background: #000000;color: #999999;}
+.bible_bg_w{background: #ffffff;color: #555555;}
+
+.top_menu .ml {display: inline-block;;margin-right: 2px;}
+.mm a{color: #4374D9;font-size: 14px;letter-spacing: 3px;}
+.top_menu_item{font-size: 12px;  margin-bottom: 6px;margin-top: 6px; }
+.bd_body{width: 100%;}
+.sub_cube{font-size: 12px;float: left;width: 50%;}
+.sub_cube table{width: 100%;}
+.main_cube{font-size: 12px;}
