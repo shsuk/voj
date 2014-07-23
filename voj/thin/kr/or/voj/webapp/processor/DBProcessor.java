@@ -5,7 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.ServletRequest;
 import javax.sql.DataSource;
+
+
+
 
 
 
@@ -30,6 +34,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.simple.SimpleJdbcDaoSupport;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -56,11 +62,13 @@ public class DBProcessor extends SimpleJdbcDaoSupport implements ProcessorServic
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Object execute(Map<String, Object> paramMap) throws Exception {
-		return executeQuerys((String)paramMap.get("queryPath"), (CaseInsensitiveMap)paramMap.get("params"), (String)paramMap.get("action"));
-	}
-	
-	private Map<String, Object> executeQuerys(String path, CaseInsensitiveMap params, String action) throws Exception {
+		String path = (String)paramMap.get("queryPath");
+		CaseInsensitiveMap params = (CaseInsensitiveMap)paramMap.get("params");
+		String action = (String)paramMap.get("action");
+		ServletRequest request = (ServletRequest)paramMap.get("_REQUEST_");
+		
 		Map<String, Object> resultSet = new HashMap<String, Object>();
 		
 		Map<String, JSONObject> queryInfos = QueryInfoFactory.findQuerys(path, params);
@@ -83,13 +91,50 @@ public class DBProcessor extends SimpleJdbcDaoSupport implements ProcessorServic
 			
 			String query = queryInfo.getString("query");
 			query = makeQuery(key, query, queryInfos);
-			Object rows = executeQuery(query, getBoolean("singleRow", queryInfo, false), params);
-			//결과저장
-			resultSet.put(queryInfo.getString("id"), rows);	
+			boolean isSingleRow = getBoolean("singleRow", queryInfo, false);
+			String id = queryInfo.getString("id");
+			String loop = getString("loop", queryInfo, "");
+			//반복실행할 커리에 대한 처리
+			if(!"".equals(loop)){
+				Map<String, String[]> reqParamMap = request.getParameterMap();
+				String[] vals = reqParamMap.get(loop);
+				if(vals!=null){
+					//loop필드 값의 갯수 만큼 반복실행한다.
+					for(int i=0; i<vals.length; i++){
+						setRequestValue(i, params, reqParamMap);//해당 인덱스의 request값을 파라메터값에 설정한다.
+						executeQuery(id, query, isSingleRow, params, resultSet);
+					}
+				}
+			}else{
+				executeQuery(id, query, isSingleRow, params, resultSet);
+			}
 		
 		}
 		
 		return resultSet;
+	}
+	private void executeQuery(String id, String query, boolean isSingleRow, CaseInsensitiveMap params, Map<String, Object> resultSet) throws Exception {
+		
+		Object rows = executeQuery(query, isSingleRow, params);
+		//단일 레코드인 경우 결과를 쿼리의 파라메퍼로 추가해 준다.
+		if (rows instanceof Map) {
+			Map<String, Object> row = (Map<String, Object>) rows;
+			
+			for(String fld : row.keySet()){
+				params.put(id+"."+fld, row.get(fld));
+			}
+		}
+
+		//결과저장
+		resultSet.put(id, rows);	
+	}
+	private CaseInsensitiveMap setRequestValue(int i, CaseInsensitiveMap params, Map<String, String[]> reqParamMap) {
+		for(String ctl : reqParamMap.keySet()){
+			String[] pvs = reqParamMap.get(ctl);
+			String pv = pvs[i<pvs.length ? i: (pvs.length-1)];
+			params.put(ctl, pv);
+		}
+		return params;
 	}
 	private boolean getBoolean(String key, JSONObject queryInfo, boolean defaultValue) throws Exception {
 		return queryInfo.containsKey(key) ? queryInfo.getBoolean(key) : defaultValue;

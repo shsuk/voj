@@ -3,6 +3,8 @@ package kr.or.voj.webapp.processor;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletRequest;
+
 import net.ion.webapp.utils.LowerCaseMap;
 
 import org.apache.commons.collections.map.CaseInsensitiveMap;
@@ -77,11 +79,12 @@ public class ProcessorServiceFactory  implements ApplicationContextAware {
 		return processorServiceMap.get(method);
 
 	}
-	public static Map<String, Object> executeDataBase(String path, CaseInsensitiveMap params, String action) throws Exception{
+	public static Map<String, Object> executeDataBase(String path, CaseInsensitiveMap params, String action, ServletRequest request) throws Exception{
 		Map<String,Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("queryPath", path);
 		paramMap.put("params", params);
 		paramMap.put("action", action);
+		paramMap.put("_REQUEST_", request);
 		
 		return (Map<String, Object>)processorServiceMap.get("db").execute(paramMap);
 

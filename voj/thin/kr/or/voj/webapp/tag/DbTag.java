@@ -42,13 +42,13 @@ public class DbTag extends BodyTagSupport {
 			DefaultLowerCaseMap req = new DefaultLowerCaseMap();
 
 			String body = bodyContent!=null ? bodyContent.getString().trim() : "";
-			
+			//기본값 맵에 추가한다.
 			if(StringUtils.isNotEmpty(body)){
 				body = body.startsWith("{")  ? body : "{" + body + "}";
 				JSONObject defaultParam = JSONObject.fromObject(body);
 				params.putAll(defaultParam);
 			}
-			
+			//request정보를 맵에 추가한다.
 			Map<String, String[]> parameterMap = request.getParameterMap();
 			
 			for(String key :  parameterMap.keySet()){
@@ -63,17 +63,17 @@ public class DbTag extends BodyTagSupport {
 				}
 			}
 			
-			String action = (String)req.get(actionFild);
+			String action = (String)params.get(actionFild);
 			action = StringUtils.isEmpty(action) ? "" : action;
 			
-			Map<String, Object> resultSet = ProcessorServiceFactory.executeDataBase(queryPath, params, action);
+			Map<String, Object> resultSet = ProcessorServiceFactory.executeDataBase(queryPath, params, action, request);
 			
 			for(String key : resultSet.keySet()){
 				result.put(key, resultSet.get(key));
 				pageContext.setAttribute(key, resultSet.get(key));;
 			}
 			
-			request.setAttribute("req", req);;
+			request.setAttribute("req", req);
 			result.put("success", true);
 		
 			pageContext.setAttribute("JSON", result);

@@ -22,8 +22,8 @@
 
 <db:db queryPath="test/crud" actionFild="act">
 	{
-		a:"123",
-		b:"qqq"
+		act:'${empty(param.bd_id) ? "i" : "u" }',
+		bd_id: '${req.bd_id }'
 	}
 </db:db> 
 
