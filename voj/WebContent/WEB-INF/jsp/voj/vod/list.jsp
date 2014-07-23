@@ -242,7 +242,7 @@
 				<c:set var="vod_link">load_view(${row.vod_id })</c:set>
 				<div style="float: left; display:inline-block;font-size: 14px ;width:160px; margin: 0px;">
 					<div onclick="${row.bd_cat=='newfam' ? img_link : vod_link }" style="vertical-align: bottom; width:150px;height:${row.bd_cat=='sun' ? '119' : '100' }px;border:1px solid #B6B5DB;margin-bottom:5px; text-align:center; overflow: hidden;cursor: pointer;" >
-						<tp:img file_id="${row.file_id}" thum="150" style="width:150px;height:${row.bd_cat=='sun' ? '119' : '100' }px;" />
+						<tp:img file_id="${row.file_id}" thum="150" style="width:150px;height:${row.bd_cat=='sun' ? '119' : '100'}px;" />
 					</div>
 					<c:if test="${req.bd_cat!='sun' && req.bd_cat!='newfam' }">
 						<div style=" width:150px; font-size: 12px;"><b>제목 : </b>${row.preacher }</div>
