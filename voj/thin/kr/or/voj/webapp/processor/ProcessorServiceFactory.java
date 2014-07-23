@@ -22,7 +22,7 @@ import org.springframework.core.io.Resource;
  * </pre>
  */
 public class ProcessorServiceFactory  implements ApplicationContextAware {
-	private static Map<String, DBProcessor> processorServiceMap = new HashMap<String, DBProcessor>();;
+	private static Map<String, ProcessorService> processorServiceMap = new HashMap<String, ProcessorService>();;
 	private static ApplicationContext applicationContext;
 	private static final Logger logger = Logger.getLogger(ProcessorServiceFactory.class);
 	private static String queryFullPath = null;
@@ -54,15 +54,16 @@ public class ProcessorServiceFactory  implements ApplicationContextAware {
 		if(processorServiceMap.size() > 0){
 			//return;
 		}
-		String[] serviceList = applicationContext.getBeanNamesForType(DBProcessorService.class);
+		String[] serviceList = applicationContext.getBeanNamesForType(ProcessorService.class);
 
 		for(String key : serviceList) {
-			String name = key;
+			String name = "";
 			try {
-				DBProcessor autoProcessor = (DBProcessor)applicationContext.getBean(key);
-				//name = autoProcessor.toString();
-				//name = StringUtils.substringBetween(name, "kr.or.voj.wbapp.processor", "ProcessorService").toLowerCase();
-				//name = name.replace('.', '_');
+				ProcessorService autoProcessor = (ProcessorService)applicationContext.getBean(key);
+				name = autoProcessor.toString();
+				
+				name = StringUtils.substringBetween(name, "kr.or.voj.webapp.processor.", "Processor").toLowerCase();
+				name = name.replace('.', '_');
 				processorServiceMap.put(name , autoProcessor);
 				
 			} catch (Exception e) {
@@ -72,13 +73,17 @@ public class ProcessorServiceFactory  implements ApplicationContextAware {
 	
 	}
 	
-	public static DBProcessor getProcessorService(String method) {
+	public static ProcessorService getProcessorService(String method) {
 		return processorServiceMap.get(method);
 
 	}
-	public static void executeDataBase(String path, CaseInsensitiveMap params) throws Exception{
-		params.put("_QUERY_PATH_", path);
-		processorServiceMap.get("db").execute(params);
+	public static Map<String, Object> executeDataBase(String path, CaseInsensitiveMap params, String action) throws Exception{
+		Map<String,Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("queryPath", path);
+		paramMap.put("params", params);
+		paramMap.put("action", action);
+		
+		return (Map<String, Object>)processorServiceMap.get("db").execute(paramMap);
 
 	}
 	

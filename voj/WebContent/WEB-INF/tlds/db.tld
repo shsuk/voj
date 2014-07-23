@@ -11,11 +11,18 @@
 		<name>db</name>
 		<tag-class>kr.or.voj.webapp.tag.DbTag</tag-class>
 		<body-content>scriptless</body-content>
-		<description>Database</description>
+		<description>Database </description>
 		<attribute>
 			<name>queryPath</name>
 			<description>쿼리 아이디</description>
 			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>actionFild</name>
+			<description>쿼리실행 구룹정보가 있는 필드명</description>
+			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>

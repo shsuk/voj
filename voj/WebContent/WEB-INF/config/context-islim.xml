@@ -73,14 +73,4 @@
 		<property name="queueCapacity" value="5" />
 	</bean>
 
-
-
-	
-	<bean id="db" class="kr.or.voj.webapp.processor.DBProcessorService" >
-	</bean>
-	<bean id="processorServiceFactory" class="kr.or.voj.webapp.processor.ProcessorServiceFactory" >
-		<property name="queryPath" value="/WEB-INF/sql"/>
-	</bean>
-	
-
 </beans>

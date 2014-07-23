@@ -17,7 +17,7 @@
 [
 	<job:db id="rows" query="voj/vod/list" singleRow="false" >
 		defaultValues:{
-		listCount:6,
+		listCount:${req.bd_cat=='newfam' ? 10 : 6 },
 		pageNo:1,
 		_sort_val: "${empty(req._sort_opt) ? '' : fn:replace(fn:replace(' ORDER BY @key @opt ','@key', req._sort_key), '@opt',  (req._sort_opt=='d' ? ' desc ' : ' asc '))}"
 	}
@@ -241,8 +241,8 @@
 				<c:set var="img_link">showImg('${row.file_id }', this.src);</c:set>
 				<c:set var="vod_link">load_view(${row.vod_id })</c:set>
 				<div style="float: left; display:inline-block;font-size: 14px ;width:160px; margin: 0px;">
-					<div onclick="${row.bd_cat=='newfam' ? img_link : vod_link }" style="vertical-align: bottom; width:150px;height:119px;border:1px solid #B6B5DB;margin-bottom:5px; text-align:center; overflow: hidden;cursor: pointer;" >
-						<tp:img file_id="${row.file_id}" thum="150" style="width:150px;${row.bd_cat=='sun' ? 'height:119px;' : '' }" />
+					<div onclick="${row.bd_cat=='newfam' ? img_link : vod_link }" style="vertical-align: bottom; width:150px;height:${row.bd_cat=='sun' ? '119' : '100' }px;border:1px solid #B6B5DB;margin-bottom:5px; text-align:center; overflow: hidden;cursor: pointer;" >
+						<tp:img file_id="${row.file_id}" thum="150" style="width:150px;height:${row.bd_cat=='sun' ? '119' : '100' }px;" />
 					</div>
 					<c:if test="${req.bd_cat!='sun' && req.bd_cat!='newfam' }">
 						<div style=" width:150px; font-size: 12px;"><b>제목 : </b>${row.preacher }</div>
