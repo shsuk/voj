@@ -17,7 +17,7 @@
 [
 	<job:db id="rows" query="voj/vod/list" singleRow="false" >
 		defaultValues:{
-		listCount:6,
+		listCount:${req.bd_cat=='newfam' ? 10 : 6 },
 		pageNo:1,
 		_sort_val: "${empty(req._sort_opt) ? '' : fn:replace(fn:replace(' ORDER BY @key @opt ','@key', req._sort_key), '@opt',  (req._sort_opt=='d' ? ' desc ' : ' asc '))}"
 	}

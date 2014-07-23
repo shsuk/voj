@@ -97,6 +97,10 @@ public abstract class QueryInfoFactory {
 
 			info.put("id", id);
 			info.put("query", query);
+			
+			if(queryInfos.containsKey(id)){
+				id += "_" + info.get("action");
+			};
 			queryInfos.put(id,info);
 		}
 		

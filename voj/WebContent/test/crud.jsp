@@ -29,7 +29,7 @@
 
 ${row }
 <table style="" border="1">
-<t:view src="${empty(row1) ? row2 : row1 }">
+<t:view src="${row }">
 	<tr>
 		<th>@{key}</th>
 		<td>@{value}</td>

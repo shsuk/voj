@@ -71,28 +71,32 @@ public class DBProcessor extends SimpleJdbcDaoSupport implements ProcessorServic
 		
 		for(String key : queryInfos.keySet()){
 			JSONObject queryInfo = queryInfos.get(key);
-			String actionValue = (String)queryInfo.get("action");
-			actionValue = StringUtils.isEmpty(actionValue) ? "" : actionValue;
-			//action이 없거나 같은 궈리만 실행한다.
-			if(StringUtils.isNotEmpty(actionValue) && !StringUtils.equals(action, actionValue)){
+			String queryAction = getString("action", queryInfo, "");
+			//action이 없거나 같은 쿼리만 실행한다.
+			if(!"".equals(queryAction) && !StringUtils.equals(action, queryAction)){
 				continue;
 			}
-			
-			boolean subQuery =  queryInfo.containsKey("subQuery") ? queryInfo.getBoolean("subQuery") : false;
-			if(subQuery){
+			//다른 쿼리의 부속 쿼리는 스킵한다.
+			if(getBoolean("subQuery", queryInfo, false)){
 				continue;
 			}
-			boolean isSingleRow =  queryInfo.containsKey("singleRow") ? queryInfo.getBoolean("singleRow") : false;
 			
 			String query = queryInfo.getString("query");
 			query = makeQuery(key, query, queryInfos);
-			Object rows = executeQuery(query, isSingleRow, params);
+			Object rows = executeQuery(query, getBoolean("singleRow", queryInfo, false), params);
 			//결과저장
-			resultSet.put(key, rows);	
+			resultSet.put(queryInfo.getString("id"), rows);	
 		
 		}
 		
 		return resultSet;
+	}
+	private boolean getBoolean(String key, JSONObject queryInfo, boolean defaultValue) throws Exception {
+		return queryInfo.containsKey(key) ? queryInfo.getBoolean(key) : defaultValue;
+	}
+	private String getString(String key, JSONObject queryInfo, String defaultValue) throws Exception {
+		Object val = queryInfo.get(key);
+		return val==null ? "" : val.toString();
 	}
 
 	private Object executeQuery(String query, boolean isSingleRow, CaseInsensitiveMap params) throws Exception {

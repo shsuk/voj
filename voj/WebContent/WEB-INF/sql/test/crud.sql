@@ -1,15 +1,13 @@
 /*
  {
- 	id:'d',
- 	action:'d'
+ 	id:'d', action:'d'
  }
  */
 delete voj_gallery
 set bd_id = :bd_id;
 /*
  {
- 	id:'i',
- 	action:'i'
+ 	id:'i', action:'i'
  }
  */
 INSERT INTO voj_board(
@@ -25,7 +23,7 @@ INSERT INTO voj_board(
 	
 );
 /*
- {key:'cnt'}
+ {key:'cnt', action:'u'}
  */
 UPDATE voj_board
 SET view_count = view_count + 1
@@ -33,24 +31,24 @@ WHERE bd_id= :bd_id
 ;
 
 /*
- {id:'row1',singleRow="true",action:'u'}
+ {id:'row', action:'u', singleRow="true"}
  */
 SELECT *
 FROM voj_board 
 WHERE  bd_id = :bd_id
 ;
+
 /*
- {id:'row2',singleRow="true", action:'i'}
+ {id:'row', action:'i', singleRow="true"}
  */
-SELECT *
-FROM voj_board 
+SELECT  t1.*, LAST_INSERT_ID() dd
+FROM voj_board t1
 WHERE bd_id = LAST_INSERT_ID()
 ;
 
 /*
  {
- 	id:'rows',
- 	action:'l'
+ 	id:'rows', action:'l'
  }
  */
 SELECT *
