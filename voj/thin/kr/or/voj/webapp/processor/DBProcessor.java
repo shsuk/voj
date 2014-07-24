@@ -9,7 +9,6 @@ import javax.servlet.ServletRequest;
 import javax.sql.DataSource;
 
 import kr.or.voj.webapp.utils.DefaultMapRowMapper;
-
 import net.sf.json.JSONObject;
 
 import org.apache.commons.collections.map.CaseInsensitiveMap;
@@ -46,12 +45,11 @@ public class DBProcessor extends SimpleJdbcDaoSupport implements ProcessorServic
 	}
 
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public Object execute(Map<String, Object> paramMap) throws Exception {
-		String path = (String)paramMap.get("queryPath");
-		CaseInsensitiveMap params = (CaseInsensitiveMap)paramMap.get("params");
-		String action = (String)paramMap.get("action");
-		ServletRequest request = (ServletRequest)paramMap.get("_REQUEST_");
+	public Object execute(ProcessorParam processorParam) throws Exception {
+		String path = processorParam.getQueryPath();
+		CaseInsensitiveMap params = processorParam.getParams();
+		String action = processorParam.getAction();
+		ServletRequest request = processorParam.getRequest();
 		
 		Map<String, Object> resultSet = new HashMap<String, Object>();
 		
@@ -79,7 +77,7 @@ public class DBProcessor extends SimpleJdbcDaoSupport implements ProcessorServic
 			String id = queryInfo.getString("id");
 			String loop = getString("loop", queryInfo, "");
 			//반복실행할 커리에 대한 처리
-			if(!"".equals(loop)){
+			if(request!=null && !"".equals(loop)){
 				Map<String, String[]> reqParamMap = request.getParameterMap();
 				String[] vals = reqParamMap.get(loop);
 				if(vals!=null){
@@ -92,7 +90,6 @@ public class DBProcessor extends SimpleJdbcDaoSupport implements ProcessorServic
 			}else{
 				executeQuery(id, query, isSingleRow, params, resultSet);
 			}
-		
 		}
 		
 		return resultSet;

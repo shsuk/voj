@@ -20,6 +20,19 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<name>exception</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<name>processorList</name>
+			<description>실행될 프로세서 이이디 리스트</description>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
 			<name>actionFild</name>
 			<description>쿼리실행 구룹정보가 있는 필드명</description>
 			<required>false</required>

@@ -20,16 +20,16 @@
 </head>
 <body >
 
-<db:db queryPath="test/crud" actionFild="act">
+<db:db queryPath="test/crud" actionFild="act" processorList="db" exception="true">
 	{
 		act:'${empty(param.bd_id) ? "i" : "u" }',
 		bd_id: '${req.bd_id }'
 	}
 </db:db> 
 
-${row }
+${JSON }
 <table style="" border="1">
-<t:view src="${row }">
+<t:view src="${db.row }">
 	<tr>
 		<th>@{key}</th>
 		<td>@{value}</td>

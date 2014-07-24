@@ -1,9 +1,12 @@
 package kr.or.voj.webapp.processor;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletRequest;
+
+import kr.or.voj.webapp.utils.DefaultLowerCaseMap;
 
 import org.apache.commons.collections.map.CaseInsensitiveMap;
 import org.apache.commons.lang.StringUtils;
@@ -77,17 +80,47 @@ public class ProcessorServiceFactory  implements ApplicationContextAware {
 		return processorServiceMap.get(method);
 
 	}
-	public static Map<String, Object> executeDataBase(String path, CaseInsensitiveMap params, String action, ServletRequest request) throws Exception{
-		Map<String,Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("queryPath", path);
-		paramMap.put("params", params);
-		paramMap.put("action", action);
-		paramMap.put("_REQUEST_", request);
+	public static Map<String, Object> executeMain(List<String> processorList, CaseInsensitiveMap params, String queryPath, String action, ServletRequest request) throws Exception{
+		ProcessorParam processorParam = new ProcessorParam();
+		processorParam.setQueryPath(queryPath);
+		processorParam.setAction(action);
+		processorParam.setParams(params);
+		processorParam.setRequest(request);
+		processorParam.setProcessorList(processorList);
 		
-		return (Map<String, Object>)processorServiceMap.get("db").execute(paramMap);
+		return executeMain(processorParam);
 
 	}
-	
+	public static Map<String, Object> executeMain(ProcessorParam processorParam) throws Exception{
+		
+		return (Map<String, Object>)processorServiceMap.get("main").execute(processorParam);
+
+	}
+	public static DefaultLowerCaseMap getReqParam(ServletRequest request){
+		DefaultLowerCaseMap req = new DefaultLowerCaseMap();
+		return (DefaultLowerCaseMap)setReqParam(request, req);
+		
+	}
+	public static CaseInsensitiveMap setReqParam(ServletRequest request, CaseInsensitiveMap params){
+		if(request==null){
+			return params;
+		}
+		
+		//request정보를 맵에 추가한다.
+		Map<String, String[]> parameterMap = request.getParameterMap();
+		
+		for(String key :  parameterMap.keySet()){
+			String[] vals = parameterMap.get(key);
+			params.put(key, vals[0]);
+			
+			for(int i=0; i<vals.length; i++){
+				String val = vals[i];
+				params.put(key+"[" +i + "]", val);
+			}
+		}
+		
+		return params;
+	}	
 /*
 	public static Map<String, ProcessorService> getProcessorServiceMap() {
 		return processorServiceMap;
