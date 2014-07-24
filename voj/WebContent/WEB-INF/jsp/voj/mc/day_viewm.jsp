@@ -263,7 +263,7 @@
 					break;
 			}
 		}
-
+///
 		new Hammer(element[0], { dragLockToAxis: true }).on("release dragleft dragright swipeleft swiperight", handleHammer);
 	}
 
