@@ -5,8 +5,6 @@ import java.util.Map;
 
 import javax.servlet.ServletRequest;
 
-import net.ion.webapp.utils.LowerCaseMap;
-
 import org.apache.commons.collections.map.CaseInsensitiveMap;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
