@@ -120,9 +120,9 @@
 			$('#tip').hide("slow");
 		},3000);
 		
-		//$('div',$('.bible')).click(function(e){
-		//	$(e.currentTarget).toggleClass('bible_bg_s');
-		//});
+		$('div',$('.bible')).click(function(e){
+			$(e.currentTarget).toggleClass('bible_bg_s');
+		});
 	});
 	
 	/**
